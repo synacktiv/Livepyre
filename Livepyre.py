@@ -18,12 +18,18 @@ def main():
     parser.add_argument("-d", "--debug", help="Enable debug output", action="store_true")
     parser.add_argument("-F", "--force", help="Force exploit even if version does not seems to be vulnerable", action="store_true")
     parser.add_argument("-c", "--check", help="Only check if the remote target is vulnerable (only revelant for the exploit without the APP_KEY)", action="store_true")
+    parser.add_argument(
+        "-r","--recurse",
+        help="When no appropriate snapshot is found, try to recurse in the target's pages. Default: 0 (no recursion)",
+        metavar="DEPTH",
+        default=0
+    )
 
     args = parser.parse_args()
     if args.app_key is not None:
-        exploit = ExploitWithAppKey(args.url, args.debug, args.function, args.param, args.headers, args.proxy, args.app_key)
+        exploit = ExploitWithAppKey(args.url, args.debug, args.function, args.param, args.headers, args.proxy, args.recurse, args.app_key)
     else:
-        exploit = ExploitWithoutAppKey(args.url, args.debug, args.function, args.param, args.headers, args.proxy, args.check, args.force)
+        exploit = ExploitWithoutAppKey(args.url, args.debug, args.function, args.param, args.headers, args.proxy, args.recurse, args.check, args.force)
     exploit.run()
 
 if __name__ == "__main__":
