@@ -22,6 +22,7 @@ def main():
         "-r","--recurse",
         help="When no appropriate snapshot is found, try to recurse in the target's pages. Default: 0 (no recursion)",
         metavar="DEPTH",
+        type=int,
         default=0
     )
 
